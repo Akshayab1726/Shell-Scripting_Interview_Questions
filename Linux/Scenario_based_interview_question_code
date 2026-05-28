@@ -1,5 +1,5 @@
 ################## Question 1 ################## 
-
+I want to automate the deployment of an application to multiple servers. How would you achieve this using a shell script?
 ################################################
 #!/bin/bash
 
@@ -19,7 +19,9 @@ for SERVER in "${SERVERS[@]}"; do
     ssh user@$SERVER "systemctl restart apache2"
     echo "Deployment to $SERVER completed"
 done
-################## Question 2 ################## 
+################## Question 2 ##################
+Create a script to monitor disk usage and send an alert if usage exceeds 80%.
+################################################
 #!/bin/bash
 
 # Define the disk usage threshold
@@ -34,9 +36,9 @@ df -H | grep -vE '^Filesystem|tmpfs|cdrom' | awk '{ print $5 " " $1 }' | while r
         # Send email or other alert here (e.g., using mail command)
     fi
 done
-################################################
-
 ################## Question 3 ################## 
+Write a script to check if a service is running, and start it if it’s not.
+################################################
 #!/bin/bash
 
 # Define the service to check
@@ -50,9 +52,9 @@ if ! systemctl is-active --quiet $SERVICE; then
 else
     echo "$SERVICE is already running"
 fi
-################################################
-
 ################## Question 4 ################## 
+Write a script to backup logs older than 7 days and delete the original files.
+################################################
 #!/bin/bash
 
 # Define the log directory and backup directory
@@ -62,9 +64,9 @@ BACKUP_DIR="/backup/logs"
 # Find and archive logs older than 7 days
 find $LOG_DIR -type f -mtime +7 -exec tar -rvf $BACKUP_DIR/logs_backup_$(date +%F).tar {} \; -exec rm {} \;
 echo "Logs older than 7 days have been backed up and deleted."
-################################################
-
 ################## Question 5 ##################
+Create a script to automate database backup.
+################################################
 #!/bin/bash
 
 # Define database credentials and backup directory
@@ -76,9 +78,10 @@ BACKUP_DIR="/backup/db"
 # Perform the backup using mysqldump
 mysqldump -u $DB_USER -p$DB_PASS $DB_NAME > $BACKUP_DIR/db_backup_$(date +%F).sql
 echo "Database backup completed."
-################################################
 
 ################## Question 6 ##################
+Write a script to rotate logs on a weekly basis.
+################################################
 #!/bin/bash
 
 # Define the log directory and archive directory
@@ -88,9 +91,9 @@ ARCHIVE_DIR="/archive/logs"
 # Move logs older than 7 days to the archive directory
 find $LOG_DIR -type f -name "*.log" -mtime +7 -exec mv {} $ARCHIVE_DIR \;
 echo "Weekly log rotation completed."
-################################################
-
 ################## Question 7 ##################
+Write a script to check the status of multiple services and restart any that are not running.
+################################################
 #!/bin/bash
 
 # Define the services to check
@@ -106,9 +109,9 @@ for SERVICE in "${SERVICES[@]}"; do
         echo "$SERVICE is running"
     fi
 done
-################################################
-
 ################## Question 8 ##################
+Create a script to update a web application by pulling the latest code from a Git repository.
+################################################
 #!/bin/bash
 
 # Define the web application directory and Git repository
@@ -121,9 +124,9 @@ git pull $GIT_REPO
 echo "Web application updated from the latest code."
 # Restart the web server
 systemctl restart nginx
-################################################
-
 ################## Question 9 ##################
+Write a script to compress and archive old log files.
+################################################
 #!/bin/bash
 
 # Define the log directory and archive directory
@@ -135,9 +138,9 @@ find $LOG_DIR -type f -name "*.log" -mtime +30 -exec gzip {} \;
 # Move compressed logs to the archive directory
 find $LOG_DIR -type f -name "*.log.gz" -mtime +30 -exec mv {} $ARCHIVE_DIR \;
 echo "Old log files have been compressed and archived."
-################################################
-
 ################## Question 10 ##################
+Write a script automate the cleanup of temporary files older than 10 days.
+################################################
 #!/bin/bash
 
 # Define the temporary directory
@@ -146,9 +149,9 @@ TEMP_DIR="/tmp"
 # Find and delete files older than 10 days
 find $TEMP_DIR -type f -mtime +10 -exec rm {} \;
 echo "Temporary files older than 10 days have been deleted."
-################################################
-
 ################## Question 11 ##################
+Write a script to monitor CPU usage and alert if it exceeds a certain threshold.
+################################################
 #!/bin/bash
 
 # Define the CPU usage threshold
@@ -160,9 +163,9 @@ if (( $(echo "$CPU_USAGE > $THRESHOLD" | bc -l) )); then
     echo "Alert: High CPU usage ($CPU_USAGE%)"
     # Send email or other alert here (e.g., using mail command)
 fi
-################################################
-
 ################## Question 12 ##################
+Write a script to install a list of packages.
+################################################
 #!/bin/bash
 
 # Define the list of packages to install
@@ -178,9 +181,9 @@ for PACKAGE in "${PACKAGES[@]}"; do
         echo "$PACKAGE is already installed"
     fi
 done
-################################################
-
 ################## Question 13 ##################
+Write a script to sync a local directory with a remote directory using rsync.
+################################################
 #!/bin/bash
 
 # Define the local and remote directories
@@ -192,9 +195,9 @@ REMOTE_DIR="/path/to/remote"
 # Sync the local directory with the remote directory
 rsync -avz $LOCAL_DIR $REMOTE_USER@$REMOTE_HOST:$REMOTE_DIR
 echo "Local directory synced with remote directory."
-################################################
-
 ################## Question 14 ##################
+Write a script to check the health of a web application by sending an HTTP request and checking the response.
+################################################
 #!/bin/bash
 
 # Define the URL and expected HTTP status code
@@ -209,9 +212,9 @@ if [ $STATUS -ne $EXPECTED_STATUS ]; then
 else
     echo "Web application is healthy. Status code: $STATUS"
 fi
-################################################
-
 ################## Question 15 ##################
+Write a script to automate the configuration of a new server with necessary packages and settings.
+################################################
 #!/bin/bash
 
 # Define the list of packages to install
